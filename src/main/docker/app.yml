@@ -1,0 +1,19 @@
+version: '2'
+services:
+    springbootangular-app:
+        image: springbootangular
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_DATASOURCE_URL=jdbc:mysql://springbootangular-mysql:3306/springbootangular?useUnicode=true&characterEncoding=utf8&useSSL=false
+            - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+            - SPRING_DATA_ELASTICSEARCH_CLUSTER_NODES=springbootangular-elasticsearch:9300
+        ports:
+            - 8080:8080
+    springbootangular-mysql:
+        extends:
+            file: mysql.yml
+            service: springbootangular-mysql
+    springbootangular-elasticsearch:
+        extends:
+            file: elasticsearch.yml
+            service: springbootangular-elasticsearch
